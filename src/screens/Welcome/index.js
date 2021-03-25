@@ -1,26 +1,16 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {
     HelloComponent,
     TitleComponent,
     PlainInputTextComponent,
+    ButtonRedirectComponent,
 } from '@components';
-import {useSelector} from 'react-redux';
 
 const WelcomeScreen = (props) => {
     //console.log({props});
     const {navigation} = props;
     const [search, setSearch] = useState(null);
-
-    /*
-    const {username} = useSelector(state => {
-        console.log("Welcome screen");
-        console.log({state});
-        console.log(state.login.list.data.username);
-        return{
-            username: state.login.list.data.username,
-        };
-    });*/
 
     function searchHandler(text) {
         console.log(`Search Handler: ${text}`);
@@ -39,8 +29,17 @@ const WelcomeScreen = (props) => {
                     searchHandler(text);
                 }}
             />
+            <View style={styles.bottom}>
+                <ButtonRedirectComponent label="Go to Profile" action={() => navigation.navigate('Profile')} />
+            </View>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    bottom: {
+        justifyContent: 'flex-end',
+    },
+});
 
 export default WelcomeScreen;

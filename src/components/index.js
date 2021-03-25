@@ -21,3 +21,6 @@ export {default as ButtonNonFillComponent} from './ButtonNonFill';
 
 //TextInput
 export {default as PlainInputTextComponent} from './PlainInputText';
+
+//List
+export {default as ProductListComponent} from './ProductList';

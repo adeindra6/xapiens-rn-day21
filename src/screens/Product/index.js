@@ -1,8 +1,9 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import {
     Header2Component,
     ButtonNonFillComponent,
+    ProductListComponent,
 } from '@components';
 import {fetchProduct} from '@redux/Product/action';
 import {useDispatch, useSelector} from 'react-redux';
@@ -10,6 +11,9 @@ import {useDispatch, useSelector} from 'react-redux';
 const ProductScreen = (props) => {
     //console.log({props});
     const {navigation} = props;
+    const [showed, setShowed] = useState(false);
+
+    const dispatch = useDispatch();
 
     const {token} = useSelector(state => {
         console.log("Product Screen");
@@ -20,17 +24,32 @@ const ProductScreen = (props) => {
         };
     });
 
-    const dispatch = useDispatch();
-    function showProduct() {
+    useEffect(() => {
         dispatch(fetchProduct(token));
+    }, []);
+
+    function showProduct() {
+        setShowed(true);
     }
     
     return(
         <View>
             <Header2Component text="Product" />
             <ButtonNonFillComponent action={() => showProduct()} label="Show All Product" />
+            {showed && 
+                <View style={styles.whitespacetop}>
+                    <ProductListComponent />
+                </View>
+            }
         </View>
     );
 };
+
+let {height} = Dimensions.get('window');
+const styles = StyleSheet.create({
+    whitespacetop: {
+        marginTop: height * 0.05,
+    },
+});
 
 export default ProductScreen;

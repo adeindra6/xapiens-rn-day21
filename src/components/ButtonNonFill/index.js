@@ -12,7 +12,7 @@ const ButtonNonFillComponent = (props) => {
         <>
             <TouchableOpacity
                 style={styles.btn}
-                action={() => actionSubmit()}>
+                onPress={() => actionSubmit()}>
                     <Text style={styles.label}>{props.label}</Text>
             </TouchableOpacity>
         </>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     btn: {
         marginTop: height * 0.03,
         backgroundColor: 'white',
-        height: '15%',
+        height: 50,
         width: '90%',
         borderWidth: 1,
         borderRadius: 20,
