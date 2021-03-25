@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -16,8 +17,9 @@ import {
   WelcomeScreen,
   ProfileScreen,
   ProductScreen,
+  ProductDetailScreen,
 } from '@screens';
-import store from '@redux/store';
+import {store, persistor} from '@redux';
 import {useSelector} from 'react-redux';
 
 const Stack = createStackNavigator();
@@ -25,7 +27,6 @@ const Tabs = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 const App: () => React$Node = () => {
-
   const {isLogin} = useSelector(state => {
     console.log({state});
     return{
@@ -72,6 +73,21 @@ const App: () => React$Node = () => {
               component={ProductScreen}
               options={{
                 title: 'Product All',
+                headerStyle: {
+                  backgroundColor: 'green',
+                },
+                headerTintColor: '#ffffff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Drawer.Screen
+              name="ProductDetail"
+              component={ProductDetailScreen}
+              options={{
+                drawerLabel: () => null,                
+                title: 'Product Detail',
                 headerStyle: {
                   backgroundColor: 'green',
                 },
@@ -176,9 +192,18 @@ const App: () => React$Node = () => {
 };
 
 const AppWrapper = () => {
+  const [localLoading, setLocalLoading] = useState(true);
+  
+  useEffect(() => {
+    setTimeout(() => setLocalLoading(false), 3000);
+  }, []);
+  console.log({localLoading});
+
   return(
     <Provider store={store}>
-      <App />
+      <PersistGate localLoading={false} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   );
 };

@@ -14,3 +14,4 @@ export {default as SignUpScreen} from './SignUp';
 export {default as WelcomeScreen} from './Welcome';
 export {default as ProfileScreen} from './Profile';
 export {default as ProductScreen} from './Product';
+export {default as ProductDetailScreen} from './ProductDetail';
