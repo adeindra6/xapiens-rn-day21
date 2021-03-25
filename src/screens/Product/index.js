@@ -31,6 +31,12 @@ const ProductScreen = (props) => {
     function showProduct() {
         setShowed(true);
     }
+
+    function showDetail(id) {
+        navigation.navigate('ProductDetail', {
+            'id': id,
+        });
+    }
     
     return(
         <View>
@@ -38,7 +44,7 @@ const ProductScreen = (props) => {
             <ButtonNonFillComponent action={() => showProduct()} label="Show All Product" />
             {showed && 
                 <View style={styles.whitespacetop}>
-                    <ProductListComponent />
+                    <ProductListComponent action={(id) => showDetail(id)} />
                 </View>
             }
         </View>

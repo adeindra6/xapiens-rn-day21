@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import {
     HelloComponent,
     TitleComponent,
@@ -36,9 +36,10 @@ const WelcomeScreen = (props) => {
     );
 };
 
+let {height} = Dimensions.get('window');
 const styles = StyleSheet.create({
     bottom: {
-        justifyContent: 'flex-end',
+        marginTop: height * 0.65,
     },
 });
 

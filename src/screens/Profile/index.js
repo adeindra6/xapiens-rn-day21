@@ -12,9 +12,12 @@ const ProfileScreen = (props) => {
     //console.log({props});
     const {navigation} = props;
 
-    const {name, username, phone, email} = useSelector(state => {
+    const {id, token, role, name, username, phone, email} = useSelector(state => {
         console.log({state});
         return{
+            id: state.login.list.data.id,
+            token: state.login.list.data.token,
+            role: state.login.list.data.role,
             name: state.login.list.data.full_name,
             username: state.login.list.data.username,
             phone: state.login.list.data.phone_number,
@@ -23,7 +26,15 @@ const ProfileScreen = (props) => {
     });
 
     function profile() {        
-        Alert.alert("Your Profile", "This is your profile page");
+        Alert.alert("Your Profile Detail",
+            "Your ID: " + id + "\n" +
+            "Your Access Token: \n\n" + token + "\n\n" +
+            "Your Role: " + role + "\n" +
+            "Full Name: " + name + "\n" +
+            "Username: " + username + "\n" +
+            "Phone Number: " + phone + "\n" +
+            "E-mail: " + email
+        );
     }
 
     function product() {

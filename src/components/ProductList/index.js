@@ -1,16 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 
 const ProductListComponent = (props) => {
+    const [selectedId, setSelectedId] = useState(null);
+    const {action} = props;
+
     const {product} = useSelector(state => {
-        console.log("Product List Screen");
+        console.log("Product List Component");
         console.log({state});
         console.log(state.product.list.data.data);
         return{
             product: state.product.list.data.data,
         };
     });
+
+    function showDetail(id) {
+        console.log(id);
+        action(id);
+    }
 
     return(
         <>
@@ -19,11 +27,17 @@ const ProductListComponent = (props) => {
                 renderItem={({item}) => {
                     return(
                         <TouchableOpacity
-                            style={styles.btn}>
+                            style={styles.btn}
+                            onPress={() => {
+                                setSelectedId(item.id);                                
+                                showDetail(item.id);
+                            }}>
                             <Text style={styles.label}>{item.name}</Text>
                         </TouchableOpacity>
                     );
                 }}
+                keyExtractor={(item) => item.id}
+                extraData={selectedId}
             />
         </>
     );
