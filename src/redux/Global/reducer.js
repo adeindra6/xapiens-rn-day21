@@ -6,7 +6,7 @@ const initialState = {
     username: '',
 };
 
-const globalReducer = (state =initialState, action) => {
+const globalReducer = (state = initialState, action) => {
     //console.log({action});
     switch(action.type) {
         case ISLOGIN:

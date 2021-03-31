@@ -1,26 +1,25 @@
 import React, {useEffect} from 'react';
-import {View} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 import {
     Header1Component,
-    Image1Component,
 } from '@components';
 
-const SplashScreen = (props) => {
+const LoadingScreen = (props) => {
     //console.log({props});
     const {navigation} = props;
 
     useEffect(() => {
         setTimeout(() => {
-            navigation.navigate('Home1');
+            navigation.navigate('Welcome');
         }, 1000);
     }, []);
 
     return(
         <View>
-            <Image1Component />
-            <Header1Component text="CodeFactory" />
+            <Header1Component text="Loading" />
+            <ActivityIndicator size="large" color="#00ff00" />
         </View>
     );
 };
 
-export default SplashScreen;
+export default LoadingScreen;
